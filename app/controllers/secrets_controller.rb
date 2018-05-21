@@ -13,8 +13,16 @@ class SecretsController < ApplicationController
   end
 
   def create
-    @secret = Secret.create(secret_params)
-    render 'create'
+    @secret = Secret.new(secret_params)
+
+    if @secret.save
+      flash[:error] = nil
+      render 'create'
+    else
+      flash[:error] = "A recipient email is required."
+      @recipient_email_valid_class = 'is-invalid'
+      render 'new'
+    end
   end
 
   def show
