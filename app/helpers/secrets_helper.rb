@@ -16,4 +16,13 @@ module SecretsHelper
       george.jetson@spacelys.sprockets
     ].shuffle.first
   end
+
+  def expires_at_options
+    options_for_select(
+      [
+        ['1 Hour', (Time.now + 1.hour)], ['1 Day', (Time.now + 1.day)], ['1 Week', (Time.now + 1.week)]
+      ],
+      (Time.now + 1.day)
+    )
+  end
 end

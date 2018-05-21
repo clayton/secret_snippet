@@ -1,0 +1,13 @@
+<form id="oidc_form" class="form" action="<%= @oidc_form_action %>" method="POST">
+  <input type="hidden" name="scope" value="openid profile email" />
+  <input type="hidden" name="response_mode" value="form_post" />
+  <input type="hidden" name="response_type" value="id_token" />
+  <input type="hidden" name="client_id" value="<%= @client_id %>" />
+  <input type="hidden" name="redirect_uri" value="<%= @redirect_uri %>" />
+  <input type="hidden" name="nonce" value="<%= @nonce %>" />
+  <input type="hidden" name="state" value="<%= @state %>" />
+  <button class="btn btn-lg btn-light">View the secret using the Trusona App</button>
+</form>
+<script>
+  document.getElementById('oidc_form').submit();
+</script>

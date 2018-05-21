@@ -1,23 +1,11 @@
-class SecretsController < ApplicationController
+require 'digest'
 
-  before_action :configure_connector, only: %i[show]
-  before_action :reset_session, only: [:show]
-
-  def index
-    @secrets = Secret.where(recipient_email: session[:email]).where(['expires_at > ?', Time.now]).order(:expires_at)
-    session[:email] = nil
-  end
+class SessionsController < ApplicationController
+  before_action :reset_session, except: [:create]
+  before_action :configure_connector, only: %i[new create]
+  skip_before_action :verify_authenticity_token
 
   def new
-    @secret = Secret.new
-  end
-
-  def create
-    @secret = Secret.create(secret_params)
-    render 'create'
-  end
-
-  def show
     @client_id    = @gateway_connector.client_id
     @auth_url     = @gateway_connector.auth_url
     @nonce        = @gateway_connector.session_nonce
@@ -26,13 +14,16 @@ class SecretsController < ApplicationController
     @oidc_form_action = Rails.env.development? ? 'https://gateway.staging.trusona.net/oidc' : 'https://gateway.trusona.net/oidc'
   end
 
-  private
+  def create
+    id_token = @gateway_connector.decode(params[:id_token])
 
-  def secret_params
-    params.require(:secret).permit(:recipient_email, :secret, :expires_at)
+    session['email'] = Digest::SHA256.hexdigest(id_token[:email])
+    redirect_to secrets_url
   end
 
-   def configure_connector
+  private
+
+  def configure_connector
     state = session[:session_state] ||= SecureRandom.uuid
     nonce = session[:session_nonce] ||= SecureRandom.uuid
     options = {
