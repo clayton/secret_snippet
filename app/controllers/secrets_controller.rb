@@ -16,6 +16,7 @@ class SecretsController < ApplicationController
 
   def create
     @secret = Secret.new(secret_params)
+    @email = params[:secret][:recipient_email].downcase.strip
 
     if @secret.save
       flash[:error] = nil
