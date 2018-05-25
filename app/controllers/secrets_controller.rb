@@ -5,7 +5,7 @@ class SecretsController < ApplicationController
 
   def index
     @list_secrets_status = 'active'
-    @secrets = Secret.where(recipient_email: session[:email]).where(['expires_at > ?', Time.now]).order(:expires_at)
+    @secrets = Secret.where(recipient_email: session[:email]).where(['expires_at > ?', Time.now]).order("expires_at DESC")
     session[:email] = nil
   end
 
