@@ -16,9 +16,6 @@ class SessionsController < ApplicationController
 
   def create
     id_token = @gateway_connector.decode(params[:id_token])
-
-    Rails.logger.debug(id_token)
-
     session['email'] = Digest::SHA256.hexdigest(id_token[:email])
     redirect_to secrets_url
   end
