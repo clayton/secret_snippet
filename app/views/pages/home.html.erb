@@ -1,0 +1,28 @@
+
+<div class="row">
+  <div class="col">
+    <h1 class="text-center display-4 font-weight-bold">Need to share a password, API key, URL, or secret family recipe with a friend?</h1>
+    <h2 class="text-center my-5">Share a Secret Snippet! It's quick, easy and because we're using <a href="https://www.trusona.com">Trusona's</a> award winning mobile app, it's secure. <strong>Only your friend can unlock the Snippet once you create it.</strong></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg">
+    <h3>Quick Start</h3>
+    <hr>
+    <h4>1. Have your friend download the Trusona App.</h4>
+    <p class="ml-4">
+      <%= link_to(image_tag("Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg", width: "120"), "https://itunes.apple.com/us/app/trusona/id1052983449?mt=8")%>
+
+      <%= link_to(image_tag("google-play-badge.png", width: 120), "https://play.google.com/store/apps/details?id=com.trusona.trusona&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1")%>
+    </p>
+    <h4>2. Create a snippet and copy the shareable link.</h4>
+    <p class="ml-4"><%= link_to "Create a new Secret Snippet", new_secret_path, class: 'btn btn-light' %></p>
+    <h4>3. Share the link and tell your friend.</h4>
+    <p class="ml-4">That's it, you're done! 😎</p>
+  </div>
+  <div class="col-lg">
+    <h3>Ready to go? Try it out.</h3>
+    <hr>
+    <%= render partial: 'secrets/short_form' %>
+  </div>
+</div>

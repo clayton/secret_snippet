@@ -12,23 +12,40 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info mb-5">
+      <%= link_to "#{navbar_logo} Secret Snippet".html_safe, root_path, class: 'navbar-brand' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= @root_status %>">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item <%= @new_secret_status %>">
+            <%= link_to "Create a Secret", new_secret_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item <%= @list_secrets_status %>">
+            <%= link_to "My secrets", secrets_path, class: "nav-link"%>
+          </li>
+          <li class="nav-item <%= @about_status %>">
+            <%= link_to "How it Works", page_path(name: "about"), class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h1 class="text-center display-2 mt-5">Secret Snippet</h1>
-          <p class="lead text-center">Securely send secret snippets. It's simple!</p>
-          <hr class="my-3">
-        </div>
-      </div>
       <%= yield %>
-      <div class="row">
-        <div class="col">
-        <hr class="mt-5">
-          <p class="text-muted">&copy; 2018</p>
-          <p><img src="https://travis-ci.org/clayton/secret_snippet.svg?branch=master" alt=""></p>
-          <p class="text-muted">Built for Trusona Lab Day - May 2018. Source available on <a href="https://github.com/clayton/secret_snippet">GitHub</a>. Built with <a href="https://www.trusona.com/">Trusona</a>. Inspired by <a href="https://onetimesecret.com/">One Time Secret</a>.</p>
-        </div>
-      </div>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted mb-0">
+        <img src="https://travis-ci.org/clayton/secret_snippet.svg?branch=master" alt=""> <br>
+        &copy; 2018 &mdash; Built for Trusona's May 2018 "Lab Day." Source available on <a href="https://github.com/clayton/secret_snippet">GitHub</a>. Built with <a href="https://www.trusona.com/">Trusona</a>. Inspired by <a href="https://onetimesecret.com/">One Time Secret</a>.
+        Download <a href="https://itunes.apple.com/us/app/trusona/id1052983449?mt=8">Trusona for iOS</a> or <a href="https://play.google.com/store/apps/details?id=com.trusona.trusona&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">Trusona for Android</a>.</p>
+      </div>
+    </footer>
+
   </body>
 </html>

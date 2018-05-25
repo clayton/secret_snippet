@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
+  get '/pages/:name' => 'pages#show', as: 'page'
   resources :sessions
   resources :secrets
-  root to: 'secrets#new'
+  root to: 'pages#show', name: "home"
 end

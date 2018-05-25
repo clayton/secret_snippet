@@ -4,11 +4,13 @@ class SecretsController < ApplicationController
   before_action :reset_session, only: [:show]
 
   def index
+    @list_secrets_status = 'active'
     @secrets = Secret.where(recipient_email: session[:email]).where(['expires_at > ?', Time.now]).order(:expires_at)
     session[:email] = nil
   end
 
   def new
+    @new_secret_status = 'active'
     @secret = Secret.new
   end
 
