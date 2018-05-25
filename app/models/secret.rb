@@ -18,7 +18,7 @@ class Secret < ApplicationRecord
   end
 
   def default_expiration
-    self.expires_at = Time.now + 1.week if expires_at.nil?
+    self.expires_at = Time.now + 1.hour if expires_at.nil?
   end
 
 end
