@@ -14,7 +14,7 @@ class Secret < ApplicationRecord
   private
 
   def hash_email
-    self.recipient_email = Digest::SHA256.hexdigest(recipient_email)
+    self.recipient_email = HashedEmail.new(recipient_email).to_s
   end
 
   def default_expiration
